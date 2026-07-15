@@ -3,16 +3,15 @@ package raisetech.student.management.controller.converter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Component;
 import raisetech.student.management.data.Student;
 import raisetech.student.management.data.StudentsCourses;
 import raisetech.student.management.domain.StudentDetail;
 
 @Component
-public class StudentConvertar {
+public class StudentConverter {
 
-  public @NonNull List<StudentDetail> convertStudentDetails(List<Student> students,
+  public List<StudentDetail> convertStudentDetails(List<Student> students,
       List<StudentsCourses> studentsCourses) {
     List<StudentDetail> studentDetails =new ArrayList<>();
     students.forEach(student -> {

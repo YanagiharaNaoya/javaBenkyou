@@ -1,6 +1,7 @@
 package raisetech.student.management.service;
 
 import java.util.List;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import raisetech.student.management.data.Student;
@@ -23,5 +24,12 @@ public class StudentService {
 
   public List<StudentsCourses> searchStudentsCourseList() {
     return repository.searchStudentsCourses();
+  }
+
+  public void  registerStudent(Student student) {
+
+    student.setId(UUID.randomUUID().toString());
+
+    repository.insertStudent(student);
   }
 }

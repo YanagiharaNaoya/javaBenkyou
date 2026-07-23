@@ -17,10 +17,10 @@ public interface StudentRepository {
   List<StudentsCourses> searchStudentsCourses();
 
   @Insert("""
-      InSERT INTO students
-      (id,　name,　kana_name, nickuname, email, area, age, gender)
+      INSERT INTO students
+      (id, name, kana_name, nickname, email, area, age, gender)
       VALUES
-      (#{id}, #{name}, #{kanaName}, #{nickuName}, 
+      (#{id}, #{name}, #{kanaName}, #{nickName}, 
       #{email}, #{area}, #{age}, #{gender})
       """)
   void insertStudent(Student student);

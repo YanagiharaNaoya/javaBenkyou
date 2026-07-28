@@ -1,12 +1,12 @@
 package raisetech.student.management.service;
 
+import raisetech.student.management.data.Student;
 import java.util.List;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import raisetech.student.management.data.Student;
 import raisetech.student.management.data.StudentsCourses;
+import raisetech.student.management.domain.StudentDetail;
 import raisetech.student.management.repository.StudentRepository;
 
 @Service
@@ -28,10 +28,19 @@ public class StudentService {
   }
 
   @Transactional
-  public void  registerStudent(Student student) {
+  public void registerStudent(StudentDetail studentDetail) {
 
-    student.setId(UUID.randomUUID().toString());
+    Student student = studentDetail.getStudent();
 
     repository.insertStudent(student);
+
+    List<StudentsCourses> courses = studentDetail.getStudentsCourses();
+
+    if (courses != null && !courses.isEmpty()) {
+      StudentsCourses course = courses.get(0);
+      course.setStudentId(student.getId());
+
+      repository.registerStudentCourse(course);
+    }
   }
 }

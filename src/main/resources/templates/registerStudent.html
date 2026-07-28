@@ -8,11 +8,6 @@
 <form th:action="@{/registerStudent}" th:object="${studentDetail}" method="post">
 
   <div>
-    <label>ID</label>
-    <input type="text" th:field="*{student.id}" required/>
-  </div>
-
-  <div>
     <label>名前</label>
     <input type="text" th:field="*{student.name}" required/>
   </div>
@@ -52,8 +47,15 @@
     <input type="text" th:field="*{student.remark}" />
   </div>
 
-    <button type="submit">登録</button>
+  <div th:each="course, stat : *{studentsCourses}">
+  <label>コース名</label>
+  <input type="text"
+         th:field="*{studentsCourses[__${stat.index}__].courseName}" />
+    </div>
 
+  </div>
+    <button type="submit">登録</button>
+   </div>
 </form>
 </body>
 </html>

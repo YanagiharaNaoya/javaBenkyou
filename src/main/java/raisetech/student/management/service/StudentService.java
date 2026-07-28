@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import raisetech.student.management.data.Student;
 import raisetech.student.management.data.StudentsCourses;
 import raisetech.student.management.repository.StudentRepository;
@@ -26,6 +27,7 @@ public class StudentService {
     return repository.searchStudentsCourses();
   }
 
+  @Transactional
   public void  registerStudent(Student student) {
 
     student.setId(UUID.randomUUID().toString());

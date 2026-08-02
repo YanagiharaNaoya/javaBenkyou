@@ -15,8 +15,8 @@ public interface StudentRepository {
   @Insert("INSERT student Values(#{name}, #{age})")
   void registerStudent(String name, int age);
 
-  @Update("UPDATE student SET age = #{age}")
-  void updateStudent(int age);
+  @Update("UPDATE student SET age = #{age} WHERE name = #{name}")
+  void updateStudent(String name, int age);
 
   @Delete("DELETE FROM student WHERE name = #{name}")
   void deleteStudent(String name);

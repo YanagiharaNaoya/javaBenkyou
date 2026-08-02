@@ -34,10 +34,10 @@ public class Application {
 
 	@PatchMapping("/student")
 	public void updateStudentName(String name, int age) {
-		repository.updateStudent(age);
+		repository.updateStudent(name, age);
 	}
 
-	@DeleteMapping("/Student")
+	@DeleteMapping("/student")
 	public void deleteStudent(String name) {
 		repository.deleteStudent(name);
 	}

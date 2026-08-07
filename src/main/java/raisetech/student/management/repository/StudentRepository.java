@@ -21,7 +21,7 @@ public interface StudentRepository {
       INSERT INTO students
       (name, kana_name, nickname, email, area, age, gender, remark, is_deleted)
       VALUES
-      (#{name}, #{kanaName}, #{nickName}, 
+      (#{name}, #{kanaName}, #{nickName},
       #{email}, #{area}, #{age}, #{gender}, #{remark}, #{isDeleted})
       """)
   @Options(useGeneratedKeys = true, keyProperty = "id")

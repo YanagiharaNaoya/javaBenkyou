@@ -40,5 +40,21 @@ public class StudentService {
       repository.registerStudentCourse(studentsCourses);
     }
   }
+
+  public StudentDetail findStudentById(Integer id) {
+
+    Student student = repository.findStudentById(id);
+
+    StudentDetail studentDetail = new StudentDetail();
+    studentDetail.setStudent(student);
+
+    return studentDetail;
+  }
+  @Transactional
+  public void updateStudent(StudentDetail studentDetail) {
+
+    repository.updateStudent(studentDetail.getStudent());
+  }
 }
+
 

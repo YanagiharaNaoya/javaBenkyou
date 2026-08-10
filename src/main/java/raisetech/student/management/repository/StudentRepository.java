@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import raisetech.student.management.data.Student;
 import raisetech.student.management.data.StudentsCourses;
 
@@ -34,5 +35,28 @@ public interface StudentRepository {
       (#{studentId}, #{courseName}, #{startDate}, #{endDate})
       """)
   void registerStudentCourse(StudentsCourses studentsCourse);
+
+  @Select("""
+      SELECT *
+      FROM students
+      WHERE id = #{id}
+      """)
+  Student findStudentById(Integer id);
+
+  @Update("""
+      UPDATE students
+      SET
+        name = #{name},
+        kana_name = #{kanaName},
+        nickname = #{nickName},
+        email = #{email},
+        area = #{area},
+        age = #{age},
+        gender = #{gender},
+        remark = #{remark}
+      WHERE id = #{id}
+      """)
+  void updateStudent(Student student);
 }
+
 

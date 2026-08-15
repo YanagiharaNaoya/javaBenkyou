@@ -1,56 +1,62 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>受講生一覧</title>
+  <title>受講生詳細</title>
 </head>
-
 <body>
+<h1>受講生詳細</h1>
+<form th:action="@{/updateStudent}" th:object="${studentDetail}" method="post">
 
-<h1>受講生一覧</h1>
+  <div>
+    <label>名前</label>
+    <input type="text" th:field="*{student.name}" required/>
+  </div>
 
-<table border="1">
+  <div>
+    <label>カナ名</label>
+    <input type="text" th:field="*{student.kanaName}" required/>
+  </div>
 
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>名前</th>
-    <th>カナ名</th>
-    <th>ニックネーム</th>
-    <th>メールアドレス</th>
-    <th>地域</th>
-    <th>年齢</th>
-    <th>性別</th>
-    <th>備考</th>
-  </tr>
-  </thead>
+  <div>
+    <label>ニックネーム</label>
+    <input type="text" th:field="*{student.nickName}" required/>
+  </div>
 
-  <tbody>
+  <div>
+    <label>メールアドレス</label>
+    <input type="email" th:field="*{student.email}" required/>
+  </div>
 
-  <tr th:each="studentDetail : ${studentList}">
+  <div>
+    <label>地域</label>
+    <input type="text" th:field="*{student.area}" required/>
+  </div>
 
-    <td th:text="${studentDetail.student.id}"></td>
+  <div>
+    <label>年齢</label>
+    <input type="number" th:field="*{student.age}" />
+  </div>
 
-    <td>
-      <a th:href="@{/student/{id}/edit(id=${studentDetail.student.id})}"
-         th:text="${studentDetail.student.name}">
-      </a>
-    </td>
+  <div>
+    <label>性別</label>
+    <input type="text" th:field="*{student.gender}" />
+  </div>
 
-    <td th:text="${studentDetail.student.kanaName}"></td>
-    <td th:text="${studentDetail.student.nickName}"></td>
-    <td th:text="${studentDetail.student.email}"></td>
-    <td th:text="${studentDetail.student.area}"></td>
-    <td th:text="${studentDetail.student.age}"></td>
-    <td th:text="${studentDetail.student.gender}"></td>
-    <td th:text="${studentDetail.student.remark}"></td>
+  <div>
+    <label>備考</label>
+    <input type="text" th:field="*{student.remark}" />
+  </div>
 
-  </tr>
+  <div th:each="course, stat : *{studentsCourses}">
+    <label for="courseName"
+           th:for="studentsCourses.[__${stat.index}__].courseName"> 受講コース名</label>
+    <input type="text" id="courseName" th:id="studentsCourses.[__${stat.index}__].courseName"
+           th:field="*{studentsCourses[__${stat.index}__].courseName}" />
+  </div>
 
-  </tbody>
-
-</table>
-
+  <div>
+    <button type="submit">更新</button>
+  </div>
+</form>
 </body>
 </html>

@@ -15,15 +15,21 @@ public interface StudentRepository {
   @Select("SELECT * FROM students")
   List<Student> search();
 
+  @Select("SELECT * FROM students WHERE id = #{id}")
+  Student searchStudent(String id);
+
   @Select("SELECT * FROM students_courses")
-  List<StudentsCourses> searchStudentsCourses();
+  List<StudentsCourses> searchStudentsCoursesList();
+
+  @Select("SELECT * FROM students_courses WHERE student_id = #{studentId}")
+  List<StudentsCourses> searchStudentsCourses(Integer studentId);
 
   @Insert("""
       INSERT INTO students
       (name, kana_name, nickname, email, area, age, gender, remark, is_deleted)
       VALUES
       (#{name}, #{kanaName}, #{nickName},
-      #{email}, #{area}, #{age}, #{gender}, #{remark}, #{isDeleted})
+      #{email}, #{area}, #{age}, #{gender}, #{remark}, false)
       """)
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void insertStudent(Student student);
@@ -34,29 +40,23 @@ public interface StudentRepository {
       VALUES
       (#{studentId}, #{courseName}, #{startDate}, #{endDate})
       """)
+  @Options(useGeneratedKeys = true, keyProperty = "id")
   void registerStudentCourse(StudentsCourses studentsCourse);
 
-  @Select("""
-      SELECT *
-      FROM students
-      WHERE id = #{id}
-      """)
-  Student findStudentById(Integer id);
-
   @Update("""
-      UPDATE students
-      SET
-        name = #{name},
-        kana_name = #{kanaName},
-        nickname = #{nickName},
-        email = #{email},
-        area = #{area},
-        age = #{age},
-        gender = #{gender},
-        remark = #{remark}
-      WHERE id = #{id}
+      UPDATE students SET
+      (name = #{name}, kana_name = #{kanaName}, nickname = #{nickName},
+      email = #{email}, area = #{area}, age = #{age}, gender =#{gender},
+      remark = #{remark}, is_deleted = #{isDeleted} WHERE id = #{id}
       """)
   void updateStudent(Student student);
+
+  @Update("""
+      UPDATE students_courses SET
+      (course_name = #{courseName}) WHERE id = #{id})
+      """)
+  void updateStudentCourse(StudentsCourses studentsCourse);
+
 }
 
 

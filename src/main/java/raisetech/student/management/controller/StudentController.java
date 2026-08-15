@@ -37,9 +37,11 @@ public class StudentController {
     return "studentList";
   }
 
-  @GetMapping("/studentsCourseList")
-  public List<StudentsCourses> getStudentsCourseList() {
-    return service.searchStudentsCourseList();
+  @GetMapping("/Student/{id}")
+  public String getStudent(@PathVariable String id, Model model) {
+    StudentDetail studentDetail = service.searchStudent(id);
+    model.addAttribute("studentDetail", studentDetail);
+    return "updateStudent";
   }
 
   @GetMapping("/newStudent")
@@ -61,24 +63,13 @@ public class StudentController {
     return "redirect:/studentList";
   }
 
-  @GetMapping("/student/{id}/edit")
-  public String editStudent(
-      @PathVariable Integer id,
-      Model model) {
-
-    StudentDetail studentDetail = service.findStudentById(id);
-
-    model.addAttribute("studentDetail", studentDetail);
-
-    return "updateStudent";
-  }
-
   @PostMapping("/updateStudent")
-  public String updateStudent(
-      @ModelAttribute StudentDetail studentDetail) {
+  public String updateStudent(@ModelAttribute StudentDetail studentDetail, BindingResult result) {
+    if (result.hasErrors()) {
+      return "updateStudent";
+    }
 
     service.updateStudent(studentDetail);
-
     return "redirect:/studentList";
   }
 }

@@ -52,6 +52,11 @@
     <input type="text" th:field="*{student.remark}" />
   </div>
 
+  <label>キャンセル</label>
+  <input type="checkbox" th:field="*{student.Deleted}" />
+  </div>
+
+
   <div th:each="course, stat : *{studentsCourses}">
     <label for="id"
            th:for="studentsCourses.[__${stat.index}__].id"> 受講コース名ID</label>

@@ -45,7 +45,7 @@ public interface StudentRepository {
 
   @Update("""
       UPDATE students SET
-      (name = #{name}, kana_name = #{kanaName}, nickname = #{nickName},
+      name = #{name}, kana_name = #{kanaName}, nickname = #{nickName},
       email = #{email}, area = #{area}, age = #{age}, gender =#{gender},
       remark = #{remark}, is_deleted = #{isDeleted} WHERE id = #{id}
       """)
@@ -53,7 +53,7 @@ public interface StudentRepository {
 
   @Update("""
       UPDATE students_courses SET
-      (course_name = #{courseName}) WHERE id = #{id})
+      course_name = #{courseName} WHERE id = #{id}
       """)
   void updateStudentCourse(StudentsCourses studentsCourse);
 

@@ -37,7 +37,7 @@ public class StudentController {
     return "studentList";
   }
 
-  @GetMapping("/Student/{id}")
+  @GetMapping("/student/{id}")
   public String getStudent(@PathVariable String id, Model model) {
     StudentDetail studentDetail = service.searchStudent(id);
     model.addAttribute("studentDetail", studentDetail);

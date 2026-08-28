@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import raisetech.student.management.data.Student;
-import raisetech.student.management.data.StudentCourses;
+import raisetech.student.management.data.StudentsCourses;
 import raisetech.student.management.repository.StudentRepository;
 
 @Service
@@ -18,14 +18,10 @@ public class StudentService {
   }
 
   public List<Student> searchStudentList() {
-    return repository.search().stream()
-        .filter(student -> student.getAge() >= 30 && student.getAge() < 40)
-        .toList();
+    return repository.search();
   }
 
-  public List<StudentCourses> searchStudentCourseList() {
-    return repository.searchStudentsCourses().stream()
-        .filter(studentCourses -> "javaコース".equals(studentCourses.getCourseName()))
-        .toList();
+  public List<StudentsCourses> searchStudentsCourseList() {
+    return repository.searchStudentsCourses();
   }
 }

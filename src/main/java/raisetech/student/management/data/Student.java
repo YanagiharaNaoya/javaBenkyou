@@ -10,6 +10,7 @@ public class Student {
   private String id;
   private String name;
   private String kanaName;
+  private String nickName;
   private String email;
   private String area;
   private int age;
@@ -17,4 +18,3 @@ public class Student {
   private String remark;
   private boolean isDeleted;
 }
-

@@ -30,9 +30,4 @@ public class StudentController {
     model.addAttribute("studentList", converter.convertStudentDetails(students, studentsCourses));
     return "studentList";
   }
-
-  @GetMapping("/studentsCourseList")
-  public List<StudentsCourses> getStudentsCourseList() {
-    return service.searchStudentsCourseList();
-  }
 }
